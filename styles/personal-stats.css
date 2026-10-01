@@ -1,0 +1,107 @@
+#personal-stats {
+    display: flex;
+    flex-direction: column;
+    padding: 16px;
+
+    .panel-title {
+        margin-bottom: 18px;
+    }
+
+    label {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 7px;
+        color: var(--muted);
+        font-size: 12px;
+        font-weight: 700;
+    }
+
+    .stat-value {
+        color: var(--subtle);
+        font-family: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+        font-size: 11px;
+        font-variant-numeric: tabular-nums;
+        font-weight: 400;
+    }
+
+    .bar {
+        width: 100%;
+        display: block;
+        height: 8px;
+        margin: 0 0 15px;
+        overflow: hidden;
+        background: #101518;
+        border: 1px solid #303b40;
+        border-radius: 4px;
+
+        .inner-bar {
+            height: 100%;
+            display: block;
+            min-width: 0;
+            background: var(--accent);
+            border-radius: 3px;
+            transition: width 240ms ease-out;
+
+            &#energy-bar {
+                background: var(--accent);
+            }
+
+            &#health-bar {
+                background: var(--health);
+            }
+
+            &#drug-bar {
+                background: var(--drug);
+            }
+
+            &#med-bar {
+                background: var(--medical);
+            }
+        }
+    }
+
+    .bar:last-child {
+        margin-bottom: 0;
+    }
+
+    .settings {
+        margin-top: auto;
+        padding-top: 14px;
+        border-top: 1px solid var(--border);
+    }
+
+    .settings .panel-title {
+        margin-bottom: 10px;
+    }
+
+    .settings-field {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) 86px;
+        align-items: center;
+        gap: 10px;
+        margin-bottom: 8px;
+        color: var(--muted);
+        font-size: 11px;
+    }
+
+    .settings-field:last-child {
+        margin-bottom: 0;
+    }
+
+    .settings-field input {
+        width: 100%;
+        height: 27px;
+        min-width: 0;
+        padding: 4px 7px;
+        color: var(--text);
+        background: #101518;
+        border: 1px solid var(--border);
+        border-radius: 4px;
+        font: inherit;
+        outline: none;
+    }
+
+    .settings-field input:focus {
+        border-color: var(--accent);
+    }
+}

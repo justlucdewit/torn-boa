@@ -1,0 +1,63 @@
+#header {
+    min-height: 52px;
+    padding: 0 max(20px, calc((100% - 1400px) / 2));
+    color: var(--text);
+    background: linear-gradient(0deg, #0C1014 0%, #344657 100%);
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    font-weight: 700;
+}
+
+#header .brand {
+    display: inline-flex;
+    flex: 0 0 auto;
+    align-items: center;
+    gap: 8px;
+}
+
+#header .brand-logo {
+    width: 24px;
+    height: 24px;
+    object-fit: contain;
+}
+
+#header .title {
+    color: var(--accent-bright);
+    font-size: 18px;
+    letter-spacing: 0;
+}
+
+.war-status {
+    min-width: 0;
+    margin-right: auto;
+    color: var(--muted);
+    font-size: 13px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.war-timer {
+    padding: 5px 8px;
+    color: var(--text);
+    background: var(--surface-raised);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    font-family: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+    font-size: 12px;
+    font-variant-numeric: tabular-nums;
+}
+
+@media (max-width: 700px) {
+    #header {
+        min-height: 48px;
+        padding: 0 12px;
+        gap: 12px;
+    }
+
+    .war-status {
+        font-size: 12px;
+    }
+}

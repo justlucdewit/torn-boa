@@ -1,0 +1,90 @@
+:root {
+    --page: #182028;
+    --surface: #182028;
+    --surface-raised: rgb(15, 20, 23);
+    --surface-hover: #29343a;
+    --border: #344047;
+    --border-strong: #48565d;
+    --text: #e2e7e8;
+    --muted: #9ba8ad;
+    --subtle: #69777d;
+    --accent: #759b2b;
+    --accent-bright: #91bd38;
+    --health: #4f9d95;
+    --medical: #be5b50;
+    --drug: #a571b6;
+    --warning: #d0aa42;
+    font-family: Arial, Helvetica, sans-serif;
+    color-scheme: dark;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    height: 100dvh;
+    min-width: 320px;
+    padding: 0;
+    margin: 0;
+    color: var(--text);
+    background: var(--page);
+    overflow: hidden;
+}
+
+#bottom-wrapper {
+    width: min(1440px, calc(100% - 40px));
+    margin: 20px auto;
+    display: grid;
+    grid-template-columns: minmax(220px, 280px) minmax(340px, 1.1fr) minmax(320px, 1fr);
+    gap: 14px;
+    height: calc(100dvh - 92px);
+}
+
+h1, h2, h3, h4, h5, h6, p {
+    margin: 0;
+    padding: 0;
+}
+
+.panel {
+    min-height: 0;
+    min-width: 0;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-top-color: var(--border-strong);
+    border-radius: 6px;
+    box-shadow: 0 10px 28px rgba(0, 0, 0, 0.18);
+}
+
+.panel-title,
+.eyebrow {
+    color: var(--muted);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0;
+    line-height: 1.2;
+    text-transform: uppercase;
+}
+
+@media (max-width: 1020px) {
+    #bottom-wrapper {
+        grid-template-columns: minmax(220px, 0.7fr) minmax(360px, 1.3fr);
+    }
+
+    #war-live {
+        grid-column: span 2;
+    }
+}
+
+@media (max-width: 700px) {
+    #bottom-wrapper {
+        width: min(100% - 24px, 540px);
+        height: calc(100dvh - 72px);
+        margin: 12px auto;
+        grid-template-columns: 1fr;
+    }
+
+    #war-live {
+        grid-column: auto;
+    }
+}
