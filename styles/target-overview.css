@@ -12,7 +12,7 @@
         min-height: 0;
         flex: 1;
         overflow-y: auto;
-        overflow-x: hidden;
+        overflow-x: visible;
         scrollbar-color: var(--border-strong) var(--surface-raised);
     }
 
@@ -84,9 +84,6 @@
                 white-space: normal;
             }
 
-            td:nth-child(2) {
-                overflow: hidden;
-            }
 
             .member-name {
                 display: flex;
