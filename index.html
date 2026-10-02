@@ -1,130 +1,135 @@
 <!DOCTYPE html>
 
 <html>
-    <head>
-        <title>B.O.A</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="icon" href="assets/favicon.ico" sizes="any">
+<head>
+  <title>B.O.A</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" href="assets/favicon.ico" sizes="any">
 
-        <link rel="stylesheet" href="styles/main.css">
-        <link rel="stylesheet" href="styles/personal-stats.css">
-        <link rel="stylesheet" href="styles/target-overview.css">
-        <link rel="stylesheet" href="styles/header.css">
-        <link rel="stylesheet" href="styles/war-live.css">
-    </head>
+  <link rel="stylesheet" href="styles/main.css">
+  <link rel="stylesheet" href="styles/personal-stats.css">
+  <link rel="stylesheet" href="styles/target-overview.css">
+  <link rel="stylesheet" href="styles/header.css">
+  <link rel="stylesheet" href="styles/war-live.css">
+</head>
 
-    <body>
-        <span id="debug"></span>
+<body>
+<span id="debug"></span>
 
-        <header id="header">
+<header id="header">
             <span class="brand" aria-label="Battle Opponent Aggregator">
                 <img class="brand-logo" src="assets/logo.png" alt="">
                 <span class="title">B.O.A.</span>
             </span>
 
-            <span id="war-status" class="war-status">
+  <span id="war-status" class="war-status">
 
             </span>
 
-            <span id="war-timer" class="war-timer">
+  <span id="war-timer" class="war-timer">
 
             </span>
-        </header>
+</header>
 
-        <main id="bottom-wrapper">
-            <section id="personal-stats" class="panel" aria-labelledby="personal-stats-title">
-                <h2 id="personal-stats-title" class="panel-title">Personal status</h2>
-                <div class="status-metrics">
-                    <label for="energy-bar">Energy <span id="energy-value" class="stat-value"></span></label>
-                    <span class="bar">
+<main id="bottom-wrapper">
+  <section id="personal-stats" class="panel" aria-labelledby="personal-stats-title">
+    <h2 id="personal-stats-title" class="panel-title">Personal status</h2>
+    <div class="status-metrics">
+      <label for="energy-bar">Energy <span id="energy-value" class="stat-value"></span></label>
+      <span class="bar">
                         <span id="energy-bar" class="inner-bar" style="width: 0%">
 
                         </span>
                     </span>
-                    
-                    <label for="health-bar">Health <span id="health-value" class="stat-value"></span></label>
-                    <span class="bar">
+
+      <label for="health-bar">Health <span id="health-value" class="stat-value"></span></label>
+      <span class="bar">
                         <span id="health-bar" class="inner-bar" style="width: 0%">
 
                         </span>
                     </span>
 
-                    <label for="med-bar">Medical cooldown <span id="med-value" class="stat-value"></span></label>
-                    <span class="bar">
+      <label for="med-bar">Medical cooldown <span id="med-value" class="stat-value"></span></label>
+      <span class="bar">
                         <span id="med-bar" class="inner-bar" style="width: 0%">
 
                         </span>
                     </span>
 
-                    <label for="drug-bar">Drug cooldown <span id="drug-value" class="stat-value"></span></label>
-                    <span class="bar">
+      <label for="drug-bar">Drug cooldown <span id="drug-value" class="stat-value"></span></label>
+      <span class="bar">
                         <span id="drug-bar" class="inner-bar" style="width: 0%">
 
                         </span>
                     </span>
-                </div>
+    </div>
 
-                <section class="settings" aria-labelledby="settings-title">
-                    <h3 id="settings-title" class="panel-title">Settings</h3>
-                    <label class="settings-field" for="api-key-input">
-                        <span>API key</span>
-                        <input id="api-key-input" type="password" autocomplete="off" spellcheck="false">
-                    </label>
-                    <label class="settings-field" for="update-frequency-input">
-                        <span>Refresh interval</span>
-                        <input id="update-frequency-input" type="number" min="1" max="3600" step="1" inputmode="numeric">
-                    </label>
-                </section>
-            </section>
-            <section id="target-overview" class="panel" aria-labelledby="target-overview-title">
-                <h2 id="target-overview-title" class="panel-title">Opposing faction</h2>
-                <div class="target-table-scroll">
-                    <table>
-                        <colgroup>
-                            <col class="target-level-column">
-                            <col>
-                            <col class="target-status-column">
-                        </colgroup>
-                        <thead>
-                            <tr>
-                                <th>level</th>
-                                <th>name</th>
-                                <th>status</th>
-                            </tr>
-                        </thead>
-                        <tbody id="target-member-list">
+    <section class="settings" aria-labelledby="settings-title">
+      <h3 id="settings-title" class="panel-title">Settings</h3>
 
-                        </tbody>
-                    </table>
-                </div>
-            </section>
-            <section id="war-live" class="panel" aria-labelledby="war-live-versus">
-                <p class="eyebrow">Ranked war</p>
-                <h1 id="war-live-versus"></h1>
-                <h2 id="war-live-score"></h2>
-                <p id="war-live-lead"></p>
-                
-                <div class="chain-section">
-                    <h2 class="panel-title">Chain overview</h2>
-                    <div class="chain-overview">
-                        <div class="chain-team">
-                            <h3 class="own-faction-name"></h3>
-                            <p id="own-chain-timer"></p>
-                        </div>
-                        <div class="chain-team">
-                            <h3 class="target-faction-name"></h3>
-                            <p id="target-chain-timer"></p>
-                        </div>
-                    </div>
-                </div>
-            </section>
-        </main>
-    </body>
-    
-    <script src="scripts/initialData.js"></script>
-    <script src="scripts/updateBars.js"></script>
-    <script src="scripts/updateTargetFactionMembers.js"></script>
-    <script src="scripts/updateHeader.js"></script>
-    <script src="scripts/updateWarLive.js"></script>
-    <script src="scripts/main.js"></script>
+      <label class="settings-field" for="api-key-input">
+        <span>Torn API key</span>
+        <input id="api-key-input" type="password" autocomplete="off" spellcheck="false">
+      </label>
+      <label class="settings-field" for="ffscouter-api-key-input">
+        <span>FFScouter API key</span>
+        <input id="ffscouter-api-key-input" type="password" autocomplete="off" spellcheck="false">
+      </label>
+      <label class="settings-field" for="update-frequency-input">
+        <span>Refresh interval</span>
+        <input id="update-frequency-input" type="number" min="1" max="3600" step="1" inputmode="numeric">
+      </label>
+    </section>
+  </section>
+  <section id="target-overview" class="panel" aria-labelledby="target-overview-title">
+    <h2 id="target-overview-title" class="panel-title">Opposing faction</h2>
+    <div class="target-table-scroll">
+      <table>
+        <colgroup>
+          <col class="target-level-column">
+          <col>
+          <col class="target-status-column">
+        </colgroup>
+        <thead>
+        <tr>
+          <th>level</th>
+          <th>name</th>
+          <th>status</th>
+        </tr>
+        </thead>
+        <tbody id="target-member-list">
+
+        </tbody>
+      </table>
+    </div>
+  </section>
+  <section id="war-live" class="panel" aria-labelledby="war-live-versus">
+    <p class="eyebrow">Ranked war</p>
+    <h1 id="war-live-versus"></h1>
+    <h2 id="war-live-score"></h2>
+    <p id="war-live-lead"></p>
+
+    <div class="chain-section">
+      <h2 class="panel-title">Chain overview</h2>
+      <div class="chain-overview">
+        <div class="chain-team">
+          <h3 class="own-faction-name"></h3>
+          <p id="own-chain-timer"></p>
+        </div>
+        <div class="chain-team">
+          <h3 class="target-faction-name"></h3>
+          <p id="target-chain-timer"></p>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+</body>
+
+<script src="scripts/initialData.js"></script>
+<script src="scripts/updateBars.js"></script>
+<script src="scripts/updateTargetFactionMembers.js"></script>
+<script src="scripts/updateHeader.js"></script>
+<script src="scripts/updateWarLive.js"></script>
+<script src="scripts/main.js"></script>
 </html>
