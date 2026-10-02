@@ -95,6 +95,7 @@ const startDashboard = async () => {
   ownChain = null
   targetChain = null
   war = null
+  targetBattleStats = {}
 
   const ownFactionLoaded = await fetchOwnFaction()
   if (!ownFactionLoaded) return

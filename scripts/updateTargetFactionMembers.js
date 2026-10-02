@@ -21,6 +21,7 @@ const MEMBER_TAGS = {
 
 const MEMBER_TAG_ORDER = ['group-target', 'alternative-target', 'unknown', 'avoid']
 let targetFactionMembers = []
+let targetBattleStats = {}
 
 const getMemberTags = () => {
   try {
@@ -108,6 +109,22 @@ const createTagPicker = (member) => {
   return pickerEl
 }
 
+const updateTargetBattleStats = async () => {
+  const battleStatsToFetch = targetFactionMembers.map(member => member.id).filter(id => !targetBattleStats[id])
+
+  if (battleStatsToFetch.length == 0) return false
+
+  const response = await getFfscouterApi(battleStatsToFetch)
+  if (!response) return false
+
+  response.forEach(battleStats => {
+    const memberId = battleStats.player_id
+    targetBattleStats[memberId] = battleStats
+  })
+
+  return true
+}
+
 const renderTargetFactionMembers = () => {
   const targetMemberListEl = document.getElementById('target-member-list')
   targetMemberListEl.replaceChildren()
@@ -150,4 +167,7 @@ const updateTargetFactionMembers = async () => {
 
   targetFactionMembers = response.members
   renderTargetFactionMembers()
+
+  if (await updateTargetBattleStats())
+    renderTargetFactionMembers()
 }
