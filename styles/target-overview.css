@@ -30,6 +30,10 @@
       width: 104px;
     }
 
+    .target-battle-stats-column {
+      width: 64px;
+    }
+
     th {
       position: sticky;
       top: 0;

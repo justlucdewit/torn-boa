@@ -136,6 +136,8 @@ const renderTargetFactionMembers = () => {
     const activityStatus = member.last_action.status
     const levelCellEl = document.createElement('td')
     const nameCellEl = document.createElement('td')
+    const battleStatsCellEl = document.createElement('td')
+    const battleStats = targetBattleStats[member.id]
     const nameEl = document.createElement('span')
     const statusCellEl = document.createElement('td')
 
@@ -144,11 +146,15 @@ const renderTargetFactionMembers = () => {
     levelCellEl.textContent = member.level
     nameCellEl.className = `member-name status-${activityStatus}`
     nameEl.textContent = member.name
+    battleStatsCellEl.className = 'member-battle-stats'
+    battleStatsCellEl.textContent = battleStats?.bs_estimate_human || '-'
+    if (battleStats?.fair_fight)
+      battleStatsCellEl.title = `Fair fight: ${battleStats.fair_fight}`
     statusCellEl.className = 'member-status'
     statusCellEl.textContent = formatHospitalRelease(member)
 
     nameCellEl.append(nameEl, createTagPicker(member))
-    rowEl.append(levelCellEl, nameCellEl, statusCellEl)
+    rowEl.append(levelCellEl, nameCellEl, battleStatsCellEl, statusCellEl)
     rowEl.addEventListener('click', () => {
       window.open(`https://www.torn.com/page.php?sid=attack&user2ID=${member.id}`, '_blank')
     })
