@@ -59,6 +59,25 @@ const sortMembers = (a, b) => {
   return b.level - a.level
 }
 
+const formatTravelStatus = (member) => {
+  const description = member.status.description.trim()
+
+  const match = description.match(/^Traveling from (.+) to (.+)$/)
+  if (!match) return description
+
+  const origin = match[1]
+  const destination = match[2]
+  if (destination === 'Torn') return `✈ ← ${origin}`
+
+  return `✈ → ${destination}`
+}
+
+const formatAbroadStatus = (member) => {
+  const description = member.status.description.trim()
+  const country = description.replace(/^In /, '')
+  return `📍 ${country}`
+}
+
 const formatHospitalRelease = (member) => {
   if (member.status.state !== 'Hospital') return member.status.state
 
@@ -70,6 +89,15 @@ const formatHospitalRelease = (member) => {
     minute: '2-digit',
   })
   return `Hospital (out ${releaseLabel})`
+}
+
+const formatMemberStatus = (member) => {
+  switch (member.status.state) {
+    case 'Hospital': return formatHospitalRelease(member)
+    case 'Traveling': return formatTravelStatus(member)
+    case 'Abroad': return formatAbroadStatus(member)
+    default: return member.status.state
+  }
 }
 
 const createTagPicker = (member) => {
@@ -151,7 +179,8 @@ const renderTargetFactionMembers = () => {
     if (battleStats?.fair_fight)
       battleStatsCellEl.title = `Fair fight: ${battleStats.fair_fight}`
     statusCellEl.className = 'member-status'
-    statusCellEl.textContent = formatHospitalRelease(member)
+    statusCellEl.textContent = formatMemberStatus(member)
+    statusCellEl.title = member.status.description
 
     nameCellEl.append(nameEl, createTagPicker(member))
     rowEl.append(levelCellEl, nameCellEl, battleStatsCellEl, statusCellEl)
