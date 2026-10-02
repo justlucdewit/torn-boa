@@ -1,4 +1,5 @@
 const TORN_API_URL = 'https://api.torn.com/v2'
+const FFSCOUTER_API_URL = 'https://ffscouter.com/api/v1'
 const SETTINGS_STORAGE_KEY = 'boa.settings.v1'
 const DEFAULT_UPDATE_FREQUENCY = 30
 
@@ -40,6 +41,19 @@ const getTornApi = async (path) => {
 
   const fullUrl = `${TORN_API_URL}/${path}?key=${tornApiKey}`
 
+  try {
+    const response = await fetch(fullUrl)
+    return response.ok ? await response.json() : null
+  } catch {
+    return null
+  }
+}
+
+const getFfscouterApi = async (targetIds) => {
+  if (!ffscouterApiKey) return null
+  if (!targetIds || targetIds.length == 0) return null
+
+  const fullUrl = `${FFSCOUTER_API_URL}/get-stats?key=${ffscouterApiKey}&targets=${targetIds.join(',')}`
   try {
     const response = await fetch(fullUrl)
     return response.ok ? await response.json() : null
