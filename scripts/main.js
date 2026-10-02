@@ -2,6 +2,7 @@ const TORN_API_URL = 'https://api.torn.com/v2'
 const SETTINGS_STORAGE_KEY = 'boa.settings.v1'
 const DEFAULT_UPDATE_FREQUENCY = 30
 
+let ffscouterApiKey = null
 let tornApiKey = null
 let updateFrequency = DEFAULT_UPDATE_FREQUENCY
 let mainLoopIntervalId = null
@@ -14,10 +15,11 @@ const getSettings = () => {
 
     return {
       apiKey: typeof savedSettings.apiKey === 'string' && savedSettings.apiKey.trim() ? savedSettings.apiKey.trim() : null,
+      ffscouterApiKey: typeof savedSettings.ffscouterApiKey === 'string' && savedSettings.ffscouterApiKey.trim() ? savedSettings.ffscouterApiKey.trim() : null,
       updateFrequency: Number.isFinite(savedFrequency) && savedFrequency >= 1 ? Math.min(savedFrequency, 3600) : DEFAULT_UPDATE_FREQUENCY,
     }
   } catch {
-    return { apiKey: null, updateFrequency: DEFAULT_UPDATE_FREQUENCY }
+    return { apiKey: null, ffscouterApiKey: null, updateFrequency: DEFAULT_UPDATE_FREQUENCY }
   }
 }
 
@@ -25,6 +27,7 @@ const saveSettings = () => {
   try {
     localStorage.setItem(SETTINGS_STORAGE_KEY, JSON.stringify({
       apiKey: tornApiKey,
+      ffscouterApiKey,
       updateFrequency,
     }))
   } catch {
@@ -92,16 +95,20 @@ const startDashboard = async () => {
 
 const initializeSettings = () => {
   const apiKeyInputEl = document.getElementById('api-key-input')
+  const ffscouterApiKeyInputEl = document.getElementById('ffscouter-api-key-input')
   const updateFrequencyInputEl = document.getElementById('update-frequency-input')
   const settings = getSettings()
 
   tornApiKey = settings.apiKey
+  ffscouterApiKey = settings.ffscouterApiKey
   updateFrequency = settings.updateFrequency
   apiKeyInputEl.value = tornApiKey || ''
+  ffscouterApiKeyInputEl.value = ffscouterApiKey || ''
   updateFrequencyInputEl.value = updateFrequency
 
   const applySettings = () => {
     tornApiKey = apiKeyInputEl.value.trim() || null
+    ffscouterApiKey = ffscouterApiKeyInputEl.value.trim() || null
     const requestedFrequency = Number(updateFrequencyInputEl.value)
     updateFrequency = Number.isFinite(requestedFrequency) && requestedFrequency >= 1
       ? Math.min(requestedFrequency, 3600)
@@ -112,6 +119,7 @@ const initializeSettings = () => {
   }
 
   apiKeyInputEl.addEventListener('change', applySettings)
+  ffscouterApiKeyInputEl.addEventListener('change', applySettings)
   updateFrequencyInputEl.addEventListener('change', applySettings)
 }
 
